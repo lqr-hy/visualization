@@ -1,0 +1,54 @@
+<template>
+  <canvas ref="webgl" />
+</template>
+
+<script lang="ts" setup>
+import { onMounted, onUpdated, ref } from 'vue'
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+const webgl = ref()
+
+// 创建场景
+const scene = new THREE.Scene()
+const sizes = {
+  width: window.innerWidth - 260,
+  height: window.innerHeight - 100
+}
+
+// 相机
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+camera.position.z = 3
+scene.add(camera)
+
+const cube = new THREE.BoxGeometry(1, 1, 1)
+const meshMaterial = new THREE.MeshBasicMaterial({
+  color: '#ff0000'
+})
+const mesh = new THREE.Mesh(cube, meshMaterial)
+
+scene.add(mesh)
+
+let renderer, orbitControls
+const renderInit = () => {
+  renderer = new THREE.WebGLRenderer({ canvas: webgl.value })
+  renderer.setSize(sizes.width, sizes.height)
+  orbitControls = new OrbitControls(camera, renderer.domElement)
+  orbitControls.enableDamping = true
+  render()
+}
+
+const render = () => {
+  orbitControls.update()
+  renderer.render(scene, camera)
+  requestAnimationFrame(render)
+}
+
+onMounted(() => {
+  renderInit()
+})
+</script>
+
+<style lang="less" scoped>
+</style>
+
