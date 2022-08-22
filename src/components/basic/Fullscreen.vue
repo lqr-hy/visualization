@@ -13,13 +13,13 @@ const webgl = ref()
 // 创建场景
 const scene = new THREE.Scene()
 const sizes = {
-  width: window.innerWidth - 260,
+  width: window.innerWidth - 240,
   height: window.innerHeight - 100
 }
 
 window.addEventListener('resize', () => {
   // 更新sizes大小
-  sizes.width = window.innerWidth - 260
+  sizes.width = window.innerWidth - 240
   sizes.height = window.innerHeight - 100
 
   // 更新相机 摄像机视锥体的长宽比

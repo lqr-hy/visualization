@@ -8,12 +8,12 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { WebGLRenderer } from 'three'
 import colorImage from '../basic/assets/textures/door/color.jpg'
-import alphaImage from '../basic/assets/textures/door/alpha.jpg'
-import ambientOcclusionImage from '../basic/assets/textures/door/ambientOcclusion.jpg'
-import heightImage from '../basic/assets/textures/door/height.jpg'
-import metalnessImage from '../basic/assets/textures/door/metalness.jpg'
-import normalImage from '../basic/assets/textures/door/normal.jpg'
-import roughnessImage from '../basic/assets/textures/door/roughness.jpg'
+// import alphaImage from '../basic/assets/textures/door/alpha.jpg'
+// import ambientOcclusionImage from '../basic/assets/textures/door/ambientOcclusion.jpg'
+// import heightImage from '../basic/assets/textures/door/height.jpg'
+// import metalnessImage from '../basic/assets/textures/door/metalness.jpg'
+// import normalImage from '../basic/assets/textures/door/normal.jpg'
+// import roughnessImage from '../basic/assets/textures/door/roughness.jpg'
 
 
 const webgl = ref()
@@ -21,13 +21,13 @@ const webgl = ref()
 // 创建场景
 const scene = new THREE.Scene()
 const sizes = {
-  width: window.innerWidth - 260,
+  width: window.innerWidth - 240,
   height: window.innerHeight - 100
 }
 
 window.addEventListener('resize', () => {
   // 更新sizes大小
-  sizes.width = window.innerWidth - 260
+  sizes.width = window.innerWidth - 240
   sizes.height = window.innerHeight - 100
 
   // 更新相机 摄像机视锥体的长宽比

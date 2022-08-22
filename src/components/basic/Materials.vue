@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { WebGLRenderer } from 'three'
@@ -51,13 +51,13 @@ const webgl = ref()
 // 创建场景
 const scene = new THREE.Scene()
 const sizes = {
-  width: window.innerWidth - 260,
+  width: window.innerWidth - 240,
   height: window.innerHeight - 100
 }
 
 window.addEventListener('resize', () => {
   // 更新sizes大小
-  sizes.width = window.innerWidth - 260
+  sizes.width = window.innerWidth - 240
   sizes.height = window.innerHeight - 100
 
   // 更新相机 摄像机视锥体的长宽比
@@ -208,7 +208,7 @@ scene.add(torus)
 
 const Clock = new THREE.Clock()
 
-let renderer: WebGLRenderer, orbitControls
+let renderer: WebGLRenderer, orbitControls: OrbitControls
 const renderInit = () => {
   renderer = new THREE.WebGLRenderer({ canvas: webgl.value })
   renderer.setSize(sizes.width, sizes.height)
@@ -221,13 +221,13 @@ const renderInit = () => {
 const render = () => {
   const elapsedTime = Clock.getElapsedTime()
 
-  // sphere.rotation.y = 0.1 * elapsedTime
-  // torus.rotation.y = 0.1 * elapsedTime
-  // plane.rotation.y = 0.1 * elapsedTime
+  sphere.rotation.y = 0.1 * elapsedTime
+  torus.rotation.y = 0.1 * elapsedTime
+  plane.rotation.y = 0.1 * elapsedTime
 
-  // sphere.rotation.x = 0.15 * elapsedTime
-  // plane.rotation.x = 0.15 * elapsedTime
-  // torus.rotation.x = 0.15 * elapsedTime
+  sphere.rotation.x = 0.15 * elapsedTime
+  plane.rotation.x = 0.15 * elapsedTime
+  torus.rotation.x = 0.15 * elapsedTime
 
   orbitControls.update()
   renderer.render(scene, camera)

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import {  onMounted, onUnmounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { WebGLRenderer } from 'three'
@@ -17,13 +17,13 @@ const gui = new dat.GUI()
 // 创建场景
 const scene = new THREE.Scene()
 const sizes = {
-  width: window.innerWidth - 260,
+  width: window.innerWidth - 240,
   height: window.innerHeight - 100
 }
 
 window.addEventListener('resize', () => {
   // 更新sizes大小
-  sizes.width = window.innerWidth - 260
+  sizes.width = window.innerWidth - 240
   sizes.height = window.innerHeight - 100
 
   // 更新相机 摄像机视锥体的长宽比

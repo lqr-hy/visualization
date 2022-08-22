@@ -7,7 +7,7 @@ import { onMounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { WebGLRenderer } from 'three'
-import FontJson from './assets/fonts/helvetiker_regular.typeface.json'
+// import FontJson from './assets/fonts/helvetiker_regular.typeface.json'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import matCapsImage from './assets/textures/matcaps/1.png'
@@ -17,13 +17,13 @@ const webgl = ref()
 // 创建场景
 const scene = new THREE.Scene()
 const sizes = {
-  width: window.innerWidth - 260,
+  width: window.innerWidth - 240,
   height: window.innerHeight - 100
 }
 
 window.addEventListener('resize', () => {
   // 更新sizes大小
-  sizes.width = window.innerWidth - 260
+  sizes.width = window.innerWidth - 240
   sizes.height = window.innerHeight - 100
 
   // 更新相机 摄像机视锥体的长宽比
@@ -123,7 +123,7 @@ fontLoader.load('./fonts/helvetiker_regular.typeface.json', (font) => {
 
 // scene.add(mesh)
 
-let renderer: WebGLRenderer, orbitControls
+let renderer: WebGLRenderer, orbitControls: OrbitControls
 const renderInit = () => {
   renderer = new THREE.WebGLRenderer({ canvas: webgl.value })
   renderer.setSize(sizes.width, sizes.height)
