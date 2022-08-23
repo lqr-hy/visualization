@@ -1,13 +1,20 @@
 <template>
-  <canvas ref="webgl" />
+  <canvas ref="webgl"/>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import {onMounted, onUnmounted, ref} from 'vue'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { WebGLRenderer } from 'three'
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import {WebGLRenderer} from 'three'
 import * as dat from 'dat.gui'
+import bakedShadow from './assets/textures/bakedShadow.jpg'
+import simpleShadow from './assets/textures/simpleShadow.jpg'
+
+const textureLoader = new THREE.TextureLoader()
+const bakedShadowTexture = textureLoader.load(bakedShadow)
+const simpleShadowTexture = textureLoader.load(simpleShadow)
+
 
 const webgl = ref()
 
@@ -92,8 +99,8 @@ scene.add(directionalLightCameraHelper)
 // 聚光灯
 const spotLight = new THREE.SpotLight(0xffffff, 0.3, 10, Math.PI * 0.3)
 
-spotLight.shadow.mapSize.width  = 1024
-spotLight.shadow.mapSize.height  = 1024
+spotLight.shadow.mapSize.width = 1024
+spotLight.shadow.mapSize.height = 1024
 spotLight.shadow.camera.fov = 30
 spotLight.shadow.camera.near = 1
 spotLight.shadow.camera.far = 6
@@ -134,20 +141,43 @@ const sphere = new THREE.SphereGeometry(0.5, 32, 32)
 const sphereMesh = new THREE.Mesh(sphere, material)
 sphereMesh.castShadow = true
 
+sphereMesh.position.y = 1
+
+gui.add(sphereMesh.position, 'y').min(-2).max(5).name('sphereY').step(0.1)
 scene.add(sphereMesh)
 
-const plane = new THREE.Mesh(new THREE.PlaneGeometry(5,5), material)
-plane.rotation.x = -Math.PI*0.5
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(5, 5),
+    /*new THREE.MeshBasicMaterial({
+      map: bakedShadowTexture
+    })*/
+    material
+)
+
+plane.rotation.x = -Math.PI * 0.5
 plane.position.y = -0.5
 plane.receiveShadow = true
 scene.add(plane)
 
+
+const sphereShadow = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(1.5, 1.5),
+    new THREE.MeshBasicMaterial({
+      color: 0x000000,
+      transparent: true,
+      alphaMap: simpleShadowTexture
+    })
+)
+
+sphereShadow.position.y = plane.position.y + 0.01
+sphereShadow.rotation.x = -Math.PI * 0.5
+scene.add(sphereShadow)
+
 let renderer: WebGLRenderer, orbitControls: OrbitControls
 const renderInit = () => {
-  renderer = new THREE.WebGLRenderer({ canvas: webgl.value })
+  renderer = new THREE.WebGLRenderer({canvas: webgl.value})
   renderer.setSize(sizes.width, sizes.height)
   // 阴影必须打开 渲染器shadowMap
-  renderer.shadowMap.enabled = true
+  renderer.shadowMap.enabled = false
   // renderer.shadowMap.type = THREE.PCFSoftShadowMap
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   orbitControls = new OrbitControls(camera, renderer.domElement)
@@ -162,6 +192,16 @@ const render = () => {
   sphereMesh.rotation.x = 0.15 * elapsedTime
 
   sphereMesh.rotation.y = 0.1 * elapsedTime
+
+  sphereMesh.position.x = Math.cos(elapsedTime) * 1.5
+  sphereMesh.position.z = Math.sin(elapsedTime) * 1.5
+  sphereMesh.position.y = Math.abs(Math.sin(elapsedTime * 3))
+
+  // update sphereShadow
+  sphereShadow.position.x = sphereMesh.position.x
+  sphereShadow.position.z = sphereMesh.position.z
+  sphereShadow.material.opacity = (1 - sphereMesh.position.y) * 0.3
+
   orbitControls.update()
   renderer.render(scene, camera)
   requestAnimationFrame(render)
