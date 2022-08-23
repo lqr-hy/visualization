@@ -23,8 +23,9 @@
           <el-menu-item index="1-6" @click="handleChangeRoute('/basic/geometry')">Geometry</el-menu-item>
           <el-menu-item index="1-7" @click="handleChangeRoute('/basic/textures')">Textures</el-menu-item>
           <el-menu-item index="1-8" @click="handleChangeRoute('/basic/materials')">Materials</el-menu-item>
-          <el-menu-item index="1-9" @click="handleChangeRoute('/basic/3d-text')">3DText</el-menu-item>
+          <el-menu-item index="1-9" @click="handleChangeRoute('/basic/threeD-text')">threeD</el-menu-item>
           <el-menu-item index="1-10" @click="handleChangeRoute('/basic/lights')">Lights</el-menu-item>
+          <el-menu-item index="1-11" @click="handleChangeRoute('/basic/shadow')">Shadow</el-menu-item>
           <!-- <el-sub-menu index="1-4">
             <template #title>item four</template>
             <el-menu-item index="1-4-1">item one</el-menu-item>

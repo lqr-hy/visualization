@@ -34,12 +34,16 @@ const BasicChildren = [
     component: () => import('../components/basic/Materials.vue')
   },
   {
-    path: '3d-text',
-    component: () => import('../components/basic/3DText.vue')
+    path: 'threeD-text',
+    component: () => import('../components/basic/ThreeDText.vue')
   },
   {
     path: 'lights',
     component: () => import('../components/basic/Lights.vue')
+  },
+  {
+    path: 'shadow',
+    component: () => import('../components/basic/Shadow.vue')
   }
 ]
 
