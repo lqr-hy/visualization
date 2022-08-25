@@ -8,11 +8,11 @@ import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {WebGLRenderer} from 'three'
 import * as dat from 'dat.gui'
-import bakedShadow from './assets/textures/bakedShadow.jpg'
+// import bakedShadow from './assets/textures/bakedShadow.jpg'
 import simpleShadow from './assets/textures/simpleShadow.jpg'
 
 const textureLoader = new THREE.TextureLoader()
-const bakedShadowTexture = textureLoader.load(bakedShadow)
+// const bakedShadowTexture = textureLoader.load(bakedShadow)
 const simpleShadowTexture = textureLoader.load(simpleShadow)
 
 
