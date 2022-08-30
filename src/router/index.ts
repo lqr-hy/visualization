@@ -47,16 +47,28 @@ const BasicChildren = [
   }
 ]
 
+const ProjectChildren = [
+  {
+    path: 'house',
+    component: () => import('../components/projects/House.vue')
+  }
+]
+
 const routes = [
   {
     path: '/',
     component: () => import('../pages/Index.vue'),
-    redirect: '/basic',
+    redirect: '/projects',
     children: [
       {
         path: 'basic',
         redirect: '/basic/textures',
         children: BasicChildren
+      },
+      {
+        path: 'projects',
+        redirect: '/projects/house',
+        children: ProjectChildren
       }
     ]
   }

@@ -3,18 +3,21 @@
     <el-col :span="24">
       <div class="title">THREE</div>
       <el-menu
-        default-active="1-8"
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
+          default-active="2-1"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
       >
         <el-sub-menu index="1">
           <template #title>
-            <el-icon><location /></el-icon>
+            <el-icon>
+              <location/>
+            </el-icon>
             <span>Basic</span>
           </template>
           <el-menu-item index="1-1" @click="handleChangeRoute('/basic/first-scene')"
-            >First-scene</el-menu-item
+          >First-scene
+          </el-menu-item
           >
           <el-menu-item index="1-2" @click="handleChangeRoute('/basic/transform')">Transform</el-menu-item>
           <el-menu-item index="1-3" @click="handleChangeRoute('/basic/animation')">Animation</el-menu-item>
@@ -31,12 +34,20 @@
             <el-menu-item index="1-4-1">item one</el-menu-item>
           </el-sub-menu> -->
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
+        <el-sub-menu index="2">
+          <template #title>
+            <el-icon>
+              <icon-menu/>
+            </el-icon>
+            <span>Projects</span>
+          </template>
+          <el-menu-item index="2-1" @click="handleChangeRoute('/projects/house')">House</el-menu-item>
+        </el-sub-menu>
+
         <el-menu-item index="4">
-          <el-icon><setting /></el-icon>
+          <el-icon>
+            <setting/>
+          </el-icon>
           <span>Navigator Four</span>
         </el-menu-item>
       </el-menu>
@@ -45,8 +56,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+import {Menu as IconMenu, Location, Setting} from '@element-plus/icons-vue'
+import {useRouter} from 'vue-router'
+
 const Router = useRouter()
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
