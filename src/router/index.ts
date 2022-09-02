@@ -44,6 +44,10 @@ const BasicChildren = [
   {
     path: 'shadow',
     component: () => import('../components/basic/Shadow.vue')
+  },
+  {
+    path: 'particles',
+    component: () => import('../components/basic/Particles.vue')
   }
 ]
 
@@ -58,11 +62,11 @@ const routes = [
   {
     path: '/',
     component: () => import('../pages/Index.vue'),
-    redirect: '/projects',
+    redirect: '/basic',
     children: [
       {
         path: 'basic',
-        redirect: '/basic/textures',
+        redirect: '/basic/particles',
         children: BasicChildren
       },
       {
