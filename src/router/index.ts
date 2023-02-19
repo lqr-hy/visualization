@@ -48,6 +48,10 @@ const BasicChildren = [
   {
     path: 'particles',
     component: () => import('../components/basic/Particles.vue')
+  },
+  {
+    path: 'galaxy',
+    component: () => import('../components/basic/Galaxy.vue')
   }
 ]
 
@@ -60,13 +64,17 @@ const ProjectChildren = [
 
 const routes = [
   {
+    path: '/test',
+    component: () => import('../pages/Test.vue'),
+  },
+  {
     path: '/',
     component: () => import('../pages/Index.vue'),
     redirect: '/basic',
     children: [
       {
         path: 'basic',
-        redirect: '/basic/particles',
+        redirect: '/basic/galaxy',
         children: BasicChildren
       },
       {

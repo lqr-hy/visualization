@@ -21,6 +21,7 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     FirstScene: typeof import('./src/components/basic/FirstScene.vue')['default']
     Fullscreen: typeof import('./src/components/basic/Fullscreen.vue')['default']
+    Galaxy: typeof import('./src/components/basic/Galaxy.vue')['default']
     Geometry: typeof import('./src/components/basic/Geometry.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     House: typeof import('./src/components/projects/House.vue')['default']
