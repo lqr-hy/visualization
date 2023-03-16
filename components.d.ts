@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Animation: typeof import('./src/components/basic/Animation.vue')['default']
     Camera: typeof import('./src/components/basic/Camera.vue')['default']
+    copy: typeof import('./src/components/basic/Galaxy copy.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -28,6 +29,8 @@ declare module '@vue/runtime-core' {
     Lights: typeof import('./src/components/basic/Lights.vue')['default']
     Materials: typeof import('./src/components/basic/Materials.vue')['default']
     Particles: typeof import('./src/components/basic/Particles.vue')['default']
+    Raycaster: typeof import('./src/components/basic/Raycaster.vue')['default']
+    RayCaster: typeof import('./src/components/basic/RayCaster.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Shadow: typeof import('./src/components/basic/Shadow.vue')['default']

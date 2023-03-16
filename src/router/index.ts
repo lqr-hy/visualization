@@ -52,6 +52,10 @@ const BasicChildren = [
   {
     path: 'galaxy',
     component: () => import('../components/basic/Galaxy.vue')
+  },
+  {
+    path: 'rayCaster',
+    component: () => import('../components/basic/RayCaster.vue')
   }
 ]
 
