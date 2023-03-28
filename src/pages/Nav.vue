@@ -3,7 +3,7 @@
     <el-col :span="24">
       <div class="title">THREE</div>
       <el-menu
-          default-active="1-14"
+          default-active="1-15"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -32,6 +32,7 @@
           <el-menu-item index="1-12" @click="handleChangeRoute('/basic/particles')">Particles</el-menu-item>
           <el-menu-item index="1-13" @click="handleChangeRoute('/basic/galaxy')">Galaxy</el-menu-item>
           <el-menu-item index="1-14" @click="handleChangeRoute('/basic/raycaster')">RayCaster</el-menu-item>
+          <el-menu-item index="1-15" @click="handleChangeRoute('/scrollBaseAnimation')">scrollBaseAnimation</el-menu-item>
           <!-- <el-sub-menu index="1-4">
             <template #title>item four</template>
             <el-menu-item index="1-4-1">item one</el-menu-item>

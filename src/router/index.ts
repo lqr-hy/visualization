@@ -69,7 +69,7 @@ const ProjectChildren = [
 const routes = [
   {
     path: '/test',
-    component: () => import('../pages/Test.vue'),
+    component: () => import('../pages/Test.vue')
   },
   {
     path: '/',
@@ -87,6 +87,10 @@ const routes = [
         children: ProjectChildren
       }
     ]
+  },
+  {
+    path: '/scrollBaseAnimation',
+    component: () => import('../components/basic/ScrollBaseAnimation.vue')
   }
 ]
 

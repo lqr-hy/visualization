@@ -36,6 +36,6 @@ import Nav from './Nav.vue'
 }
 
 .el-main {
-  background-color: aqua;
+  // background-color: aqua;
 }
 </style>
