@@ -56,6 +56,10 @@ const BasicChildren = [
   {
     path: 'rayCaster',
     component: () => import('../components/basic/RayCaster.vue')
+  },
+  {
+    path: 'physics',
+    component: () => import('../components/basic/Physics.vue')
   }
 ]
 

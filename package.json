@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
+    "@types/cannon": "^0.1.8",
     "@types/three": "^0.142.0",
+    "cannon": "^0.6.2",
+    "cannon-es": "^0.20.0",
+    "cannon-es-debugger": "^1.0.0",
     "dat.gui": "^0.7.9",
     "element-plus": "^2.2.10",
     "gsap": "^3.10.4",
