@@ -60,6 +60,10 @@ const BasicChildren = [
   {
     path: 'physics',
     component: () => import('../components/basic/Physics.vue')
+  },
+  {
+    path: 'models',
+    component: () => import('../components/basic/Models.vue')
   }
 ]
 

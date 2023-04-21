@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     House: typeof import('./src/components/projects/House.vue')['default']
     Lights: typeof import('./src/components/basic/Lights.vue')['default']
     Materials: typeof import('./src/components/basic/Materials.vue')['default']
+    Models: typeof import('./src/components/basic/Models.vue')['default']
     Particles: typeof import('./src/components/basic/Particles.vue')['default']
     Physics: typeof import('./src/components/basic/Physics.vue')['default']
     Raycaster: typeof import('./src/components/basic/Raycaster.vue')['default']

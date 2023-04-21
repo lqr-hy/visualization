@@ -345,11 +345,9 @@ const render = () => {
     item.mesh.quaternion.set(item.body.quaternion.x, item.body.quaternion.y, item.body.quaternion.z, item.body.quaternion.w)
 
     // 判断物体是否超出边界平面，如果超出则重置物体位置和速度
-    if (Math.abs(item.body.position.z) > 9 || Math.abs(item.body.position.x) > 9) {
-      if (count++ === 1) {
-        console.log(item.mesh)
-        console.log(item.body)
-      }
+    if (Math.abs(item.body.position.y) > 9) {
+      world.removeBody(item.body);
+      scene.remove(item.mesh);
       // item.body.mass = 1
       // item.body.position.set(item.body.position.x, item.body.position.y, item.body.position.z);
       // item.body.velocity.set(Math.random() * 2 - 1,  Math.random() * 5 + 5, Math.random() * 2 - 1);
