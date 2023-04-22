@@ -64,6 +64,10 @@ const BasicChildren = [
   {
     path: 'models',
     component: () => import('../components/basic/Models.vue')
+  },
+  {
+    path: 'realistic',
+    component: () => import('../components/basic/Realistic.vue')
   }
 ]
 

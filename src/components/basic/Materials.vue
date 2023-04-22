@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { WebGLRenderer } from 'three'
@@ -238,6 +238,9 @@ onMounted(() => {
   renderInit()
 })
 
+onUnmounted(() => {
+  gui.destroy()
+})
 </script>
 
 <style lang="less" scoped>
