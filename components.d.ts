@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ScrollBaseAnimation: typeof import('./src/components/basic/ScrollBaseAnimation.vue')['default']
+    Shaders: typeof import('./src/components/basic/Shaders.vue')['default']
     Shadow: typeof import('./src/components/basic/Shadow.vue')['default']
     Textures: typeof import('./src/components/basic/Textures.vue')['default']
     ThreeDText: typeof import('./src/components/basic/ThreeDText.vue')['default']

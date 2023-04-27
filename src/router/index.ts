@@ -68,6 +68,10 @@ const BasicChildren = [
   {
     path: 'realistic',
     component: () => import('../components/basic/Realistic.vue')
+  },
+  {
+    path: 'shaders',
+    component: () => import('../components/basic/Shaders.vue')
   }
 ]
 
