@@ -72,6 +72,10 @@ const BasicChildren = [
   {
     path: 'shaders',
     component: () => import('../components/basic/Shaders.vue')
+  },
+  {
+    path: 'shaders-patterns',
+    component: () => import('../components/basic/ShaderPatterns.vue')
   }
 ]
 

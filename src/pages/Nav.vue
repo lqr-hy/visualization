@@ -3,7 +3,7 @@
     <el-col :span="24">
       <div class="title">THREE</div>
       <el-menu
-          default-active="1-18"
+          default-active="1-19"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -36,6 +36,7 @@
           <el-menu-item index="1-16" @click="handleChangeRoute('/basic/models')">Models</el-menu-item>
           <el-menu-item index="1-17" @click="handleChangeRoute('/basic/realistic')">Realistic</el-menu-item>
           <el-menu-item index="1-18" @click="handleChangeRoute('/basic/shaders')">Shaders</el-menu-item>
+          <el-menu-item index="1-19" @click="handleChangeRoute('/basic/shaders-patterns')">ShaderPatterns</el-menu-item>
           <!-- <el-sub-menu index="1-4">
             <template #title>item four</template>
             <el-menu-item index="1-4-1">item one</el-menu-item>
@@ -49,7 +50,8 @@
             <span>Projects</span>
           </template>
           <el-menu-item index="2-1" @click="handleChangeRoute('/projects/house')">House</el-menu-item>
-          <el-menu-item index="2-2" @click="handleChangeRoute('/scrollBaseAnimation')">scrollBaseAnimation</el-menu-item>
+          <el-menu-item index="2-2" @click="handleChangeRoute('/scrollBaseAnimation')">scrollBaseAnimation
+          </el-menu-item>
         </el-sub-menu>
 
         <el-menu-item index="4">
@@ -64,8 +66,8 @@
 </template>
 
 <script lang="ts" setup>
-import {Menu as IconMenu, Location, Setting} from '@element-plus/icons-vue'
-import {useRouter} from 'vue-router'
+import { Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 
 const Router = useRouter()
 const handleOpen = (key: string, keyPath: string[]) => {
