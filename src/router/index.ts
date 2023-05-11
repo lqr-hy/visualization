@@ -76,6 +76,10 @@ const BasicChildren = [
   {
     path: 'shaders-patterns',
     component: () => import('../components/basic/ShaderPatterns.vue')
+  },
+  {
+    path: 'raging-sea',
+    component: () => import('../components/basic/RagingSea.vue')
   }
 ]
 
