@@ -63,25 +63,30 @@ const planeMaterial = new THREE.ShaderMaterial({
     uSmallWavesIterations: { value: 4.0 },
   }
 })
-gui.add(planeMaterial.uniforms.uBigWavesElevation, 'value').min(0).max(1).step(0.001).name('uBigWavesElevation')
-gui.add(planeMaterial.uniforms.uBigWavesFrequency.value, 'x').min(0).max(10).step(0.001).name('uBigWavesFrequencyX')
-gui.add(planeMaterial.uniforms.uBigWavesFrequency.value, 'y').min(0).max(10).step(0.001).name('uBigWavesFrequencyY')
-gui.add(planeMaterial.uniforms.uBigWavesSpeed, 'value').min(0).max(4).step(0.001).name('uBigWavesSpeed')
-gui.add(planeMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('uSmallWavesElevation')
-gui.add(planeMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('uSmallWavesFrequency')
-gui.add(planeMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('uSmallWavesSpeed')
-gui.add(planeMaterial.uniforms.uSmallWavesIterations, 'value').min(0).max(5).step(1).name('uSmallWavesIterations')
-
-gui.add(planeMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('uColorOffset')
-gui.add(planeMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('uColorMultiplier')
-gui
+const uBigWaves = gui.addFolder('uBigWaves')
+uBigWaves.add(planeMaterial.uniforms.uBigWavesElevation, 'value').min(0).max(1).step(0.001).name('uBigWavesElevation')
+uBigWaves.add(planeMaterial.uniforms.uBigWavesFrequency.value, 'x').min(0).max(10).step(0.001).name('uBigWavesFrequencyX')
+uBigWaves.add(planeMaterial.uniforms.uBigWavesFrequency.value, 'y').min(0).max(10).step(0.001).name('uBigWavesFrequencyY')
+uBigWaves.add(planeMaterial.uniforms.uBigWavesSpeed, 'value').min(0).max(4).step(0.001).name('uBigWavesSpeed')
+uBigWaves.open()
+const uSmallWaves = gui.addFolder('uSmallWaves')
+uSmallWaves.add(planeMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('uSmallWavesElevation')
+uSmallWaves.add(planeMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('uSmallWavesFrequency')
+uSmallWaves.add(planeMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('uSmallWavesSpeed')
+uSmallWaves.add(planeMaterial.uniforms.uSmallWavesIterations, 'value').min(0).max(5).step(1).name('uSmallWavesIterations')
+uSmallWaves.open()
+const uColor = gui.addFolder('uColor')
+uColor.add(planeMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('uColorOffset')
+uColor.add(planeMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('uColorMultiplier')
+uColor
     .addColor(debugObject, 'depthColor')
     .name('depthColor')
     .onChange(() => planeMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor))
-gui
+uColor
     .addColor(debugObject, 'surfaceColor')
     .name('surfaceColor')
     .onChange(() => planeMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor))
+uColor.open()
 
 
 const planeMash = new THREE.Mesh(plane, planeMaterial)
@@ -95,6 +100,10 @@ const renderInit = () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2.0))
   orBitControls = new OrbitControls(camera, renderer.domElement)
   orBitControls.enableDamping = true
+  orBitControls.maxPolarAngle = Math.PI * 0.4
+  orBitControls.minDistance = 5
+  orBitControls.maxDistance = 10
+  orBitControls.enablePan = false
   render()
 }
 
