@@ -98,11 +98,11 @@ const generateGalaxy = () => {
    * material
    */
   material = new THREE.PointsMaterial({
-    size: parameters.size,
-    sizeAttenuation: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    vertexColors: true
+    size: parameters.size, // 设置点的大小
+    sizeAttenuation: true, // 指定点的大小是痘因相机深度而减弱
+    depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
+    blending: THREE.AdditiveBlending, // 在使用此材质显示对象是要使用何种混合
+    vertexColors: true //  是否使用定点着色器
   })
 
   points = new THREE.Points(geometry, material)

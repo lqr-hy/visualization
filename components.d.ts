@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AnimatedGalaxy: typeof import('./src/components/basic/AnimatedGalaxy.vue')['default']
     Animation: typeof import('./src/components/basic/Animation.vue')['default']
     Camera: typeof import('./src/components/basic/Camera.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']

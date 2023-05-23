@@ -80,6 +80,10 @@ const BasicChildren = [
   {
     path: 'raging-sea',
     component: () => import('../components/basic/RagingSea.vue')
+  },
+  {
+    path: 'animated-galaxy',
+    component: () => import('../components/basic/AnimatedGalaxy.vue')
   }
 ]
 

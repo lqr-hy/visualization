@@ -3,7 +3,7 @@
     <el-col :span="24">
       <div class="title">THREE</div>
       <el-menu
-          default-active="1-20"
+          default-active="1-21"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -38,6 +38,7 @@
           <el-menu-item index="1-18" @click="handleChangeRoute('/basic/shaders')">Shaders</el-menu-item>
           <el-menu-item index="1-19" @click="handleChangeRoute('/basic/shaders-patterns')">ShaderPatterns</el-menu-item>
           <el-menu-item index="1-20" @click="handleChangeRoute('/basic/raging-sea')">RagingSea</el-menu-item>
+          <el-menu-item index="1-21" @click="handleChangeRoute('/basic/animated-galaxy')">AnimatedGalaxy</el-menu-item>
           <!-- <el-sub-menu index="1-4">
             <template #title>item four</template>
             <el-menu-item index="1-4-1">item one</el-menu-item>
