@@ -84,6 +84,10 @@ const BasicChildren = [
   {
     path: 'animated-galaxy',
     component: () => import('../components/basic/AnimatedGalaxy.vue')
+  },
+  {
+    path: 'modified-material',
+    component: () => import('../components/basic/ModifiedMaterial.vue')
   }
 ]
 
