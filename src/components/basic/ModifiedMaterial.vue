@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import * as THREE from 'three'
 import { onMounted, ref } from "vue"
-import { CubeTextureLoader, Mesh, MeshStandardMaterial, TextureLoader, WebGLRenderer } from "three"
+import { CubeTextureLoader, Mesh, MeshDepthMaterial, MeshStandardMaterial, TextureLoader, WebGLRenderer } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import pxTexture from './assets/textures/environmentMaps/0/px.jpg'
 import nxTexture from './assets/textures/environmentMaps/0/nx.jpg'
@@ -24,6 +24,14 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
 }
+
+// Material
+const customUniforms = {
+  uTime: {
+    value: 0,
+  },
+}
+
 
 const gltfLoader = new GLTFLoader()
 const textureLoader = new TextureLoader()
@@ -89,10 +97,58 @@ const material = new MeshStandardMaterial({
   normalMap: normalTexture
 })
 
+material.onBeforeCompile = (shader) => {
+  shader.uniforms.uTime = customUniforms.uTime
+
+  shader.vertexShader = shader.vertexShader.replace('#include <common>', `
+    #include <common>
+    uniform float uTime;
+    mat2 get2DRotateMatrix(float _angle) {
+      return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
+    }
+  `)
+
+  shader.vertexShader = shader.vertexShader.replace('#include <beginnormal_vertex>',
+      `
+    #include <beginnormal_vertex>
+    float angle = sin(position.y + uTime) * 0.2;
+    mat2 rotateMatrix = get2DRotateMatrix(angle);
+    objectNormal.xz = rotateMatrix * objectNormal.xz;`)
+
+  shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
+  `
+    #include <begin_vertex>
+    transformed.xz = rotateMatrix * transformed.xz;`)
+}
+
+const depthMaterial = new MeshDepthMaterial({
+  depthPacking: THREE.RGBADepthPacking
+})
+
+depthMaterial.onBeforeCompile = (shader) => {
+  shader.uniforms.uTime = customUniforms.uTime
+
+  shader.vertexShader = shader.vertexShader.replace('#include <common>', `
+    #include <common>
+    uniform float uTime;
+    mat2 get2DRotateMatrix(float _angle) {
+      return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
+    }
+  `)
+
+  shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
+      `
+    #include <begin_vertex>
+    float angle = sin(position.y + uTime) * 0.2;
+    mat2 rotateMatrix = get2DRotateMatrix(angle);
+    transformed.xz = rotateMatrix * transformed.xz;`)
+}
+
 gltfLoader.load(LeePerrySmithUrl, (gltf: GLTF) => {
   const mesh = gltf.scene.children[0] as Mesh
   mesh.rotation.y = Math.PI * 0.5
   mesh.material = material
+  mesh.customDepthMaterial = depthMaterial
   scene.add(mesh)
 
   updateAllMaterials()
@@ -111,7 +167,7 @@ const renderInit = () => {
   renderer = new THREE.WebGLRenderer({ canvas: webgl.value, antialias: true })
   renderer.shadowMap.enabled = true
   renderer.shadowMap.type = THREE.PCFShadowMap
-  renderer.physicallyCorrectLights = true
+  renderer.useLegacyLights = false
   renderer.outputEncoding = THREE.sRGBEncoding
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = 1
@@ -121,12 +177,13 @@ const renderInit = () => {
   orbitControls.enableDamping = true
   render()
 }
-
+const Clock = new THREE.Clock()
 const render = () => {
+  const elapsedTime = Clock.getElapsedTime()
+  customUniforms.uTime.value = elapsedTime
   orbitControls.update()
   renderer.render(scene, camera)
-  // 使用物理上正确的光照模式
-  renderer.physicallyCorrectLights = true
+  renderer.useLegacyLights = false
   requestAnimationFrame(render)
 }
 
