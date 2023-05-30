@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import * as THREE from 'three'
-import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import * as dat from 'dat.gui'
 import { BufferAttribute, BufferGeometry, WebGLRenderer } from 'three'

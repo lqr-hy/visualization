@@ -169,7 +169,7 @@ const render = () => {
   // 渲染
   renderer.render(scene, camera)
   // 使用物理上正确的光照模式
-  renderer.physicallyCorrectLights = true
+  renderer.useLegacyLights = false
   requestAnimationFrame(render)
 }
 onMounted(() => {

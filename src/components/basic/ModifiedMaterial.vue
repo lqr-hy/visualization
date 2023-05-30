@@ -99,7 +99,7 @@ const material = new MeshStandardMaterial({
 
 material.onBeforeCompile = (shader) => {
   shader.uniforms.uTime = customUniforms.uTime
-
+  // 旋转矩阵
   shader.vertexShader = shader.vertexShader.replace('#include <common>', `
     #include <common>
     uniform float uTime;
@@ -107,16 +107,16 @@ material.onBeforeCompile = (shader) => {
       return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
     }
   `)
-
+  // 对象顶点
   shader.vertexShader = shader.vertexShader.replace('#include <beginnormal_vertex>',
       `
     #include <beginnormal_vertex>
     float angle = sin(position.y + uTime) * 0.2;
     mat2 rotateMatrix = get2DRotateMatrix(angle);
     objectNormal.xz = rotateMatrix * objectNormal.xz;`)
-
+  // 旋转
   shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
-  `
+      `
     #include <begin_vertex>
     transformed.xz = rotateMatrix * transformed.xz;`)
 }
