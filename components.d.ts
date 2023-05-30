@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     ModifiedMaterial: typeof import('./src/components/basic/ModifiedMaterial.vue')['default']
     Particles: typeof import('./src/components/basic/Particles.vue')['default']
     Physics: typeof import('./src/components/basic/Physics.vue')['default']
+    PostProcessing: typeof import('./src/components/basic/PostProcessing.vue')['default']
     RagingSea: typeof import('./src/components/basic/RagingSea.vue')['default']
     RayCaster: typeof import('./src/components/basic/RayCaster.vue')['default']
     Realistic: typeof import('./src/components/basic/Realistic.vue')['default']

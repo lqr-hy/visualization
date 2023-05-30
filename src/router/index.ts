@@ -88,6 +88,10 @@ const BasicChildren = [
   {
     path: 'modified-material',
     component: () => import('../components/basic/ModifiedMaterial.vue')
+  },
+  {
+    path: 'post-processing',
+    component: () => import('../components/basic/PostProcessing.vue')
   }
 ]
 
