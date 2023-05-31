@@ -23,6 +23,7 @@ import pzTexture from './assets/textures/environmentMaps/0/pz.jpg'
 import nzTexture from './assets/textures/environmentMaps/0/nz.jpg'
 import interfaceNormalMap  from './assets/textures/interfaceNormalMap.png?url'
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import DamagedHelmetUrl from ''
 import normalUrl from './assets/models/LeePerrySmith/normal.jpg?url'
 import colorUrl from './assets/models/LeePerrySmith/color.jpg?url'
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
@@ -105,7 +106,7 @@ const material = new MeshStandardMaterial({
   normalMap: normalTexture
 })
 
-gltfLoader.load(import.meta.env.BASE_URL + '/src/components/basic/assets/models/DamagedHelmet/glTF/DamagedHelmet.gltf'
+gltfLoader.load('./models/DamagedHelmet/glTF/DamagedHelmet.gltf'
     , (gltf: GLTF) => {
   const mesh = gltf.scene.children[0] as Mesh
   mesh.scale.set(2, 2, 2)
