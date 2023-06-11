@@ -1,75 +1,53 @@
 <template>
   <el-row class="tac">
     <el-col :span="24">
-      <div class="title">THREE</div>
+      <div class="title">Visualization</div>
       <el-menu
-          default-active="1-23"
+          :default-active="$route.path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
+          :unique-opened="true"
       >
-        <el-sub-menu index="1">
+        <el-sub-menu :index="navKey" v-for="(navValue, navKey, index) in nav">
           <template #title>
             <el-icon>
-              <location/>
+              <FolderOpened/>
             </el-icon>
-            <span>Basic</span>
+            <span>{{ navKey }}</span>
           </template>
-          <el-menu-item index="1-1" @click="handleChangeRoute('/basic/first-scene')"
-          >First-scene
-          </el-menu-item
-          >
-          <el-menu-item index="1-2" @click="handleChangeRoute('/basic/transform')">Transform</el-menu-item>
-          <el-menu-item index="1-3" @click="handleChangeRoute('/basic/animation')">Animation</el-menu-item>
-          <el-menu-item index="1-4" @click="handleChangeRoute('/basic/camera')">Camera</el-menu-item>
-          <el-menu-item index="1-5" @click="handleChangeRoute('/basic/fullscreen')">Fullscreen</el-menu-item>
-          <el-menu-item index="1-6" @click="handleChangeRoute('/basic/geometry')">Geometry</el-menu-item>
-          <el-menu-item index="1-7" @click="handleChangeRoute('/basic/textures')">Textures</el-menu-item>
-          <el-menu-item index="1-8" @click="handleChangeRoute('/basic/materials')">Materials</el-menu-item>
-          <el-menu-item index="1-9" @click="handleChangeRoute('/basic/threeD-text')">threeDText</el-menu-item>
-          <el-menu-item index="1-10" @click="handleChangeRoute('/basic/lights')">Lights</el-menu-item>
-          <el-menu-item index="1-11" @click="handleChangeRoute('/basic/shadow')">Shadow</el-menu-item>
-          <el-menu-item index="1-12" @click="handleChangeRoute('/basic/particles')">Particles</el-menu-item>
-          <el-menu-item index="1-13" @click="handleChangeRoute('/basic/galaxy')">Galaxy</el-menu-item>
-          <el-menu-item index="1-14" @click="handleChangeRoute('/basic/raycaster')">RayCaster</el-menu-item>
-          <el-menu-item index="1-15" @click="handleChangeRoute('/basic/physics')">Physics</el-menu-item>
-          <el-menu-item index="1-16" @click="handleChangeRoute('/basic/models')">Models</el-menu-item>
-          <el-menu-item index="1-17" @click="handleChangeRoute('/basic/realistic')">Realistic</el-menu-item>
-          <el-menu-item index="1-18" @click="handleChangeRoute('/basic/shaders')">Shaders</el-menu-item>
-          <el-menu-item index="1-19" @click="handleChangeRoute('/basic/shaders-patterns')">ShaderPatterns</el-menu-item>
-          <el-menu-item index="1-20" @click="handleChangeRoute('/basic/raging-sea')">RagingSea</el-menu-item>
-          <el-menu-item index="1-21" @click="handleChangeRoute('/basic/animated-galaxy')">AnimatedGalaxy</el-menu-item>
-          <el-menu-item index="1-22" @click="handleChangeRoute('/basic/modified-material')">ModifiedMaterial
-          </el-menu-item>
-          <el-menu-item index="1-23" @click="handleChangeRoute('/basic/post-processing')">PostProcessing
+          <el-menu-item :index="`/${navKey}/${navPath}`"
+                        v-for="(navPath, childIndex) of navValue"
+                        @click="handleChangeRoute(`/${navKey}/${navPath}`)"
+          >{{ navPath }}
           </el-menu-item>
         </el-sub-menu>
-        <el-sub-menu index="2">
+        <el-sub-menu index="3-1">
           <template #title>
             <el-icon>
-              <icon-menu/>
+              <FolderOpened/>
             </el-icon>
             <span>Projects</span>
           </template>
-          <el-menu-item index="2-1" @click="handleChangeRoute('/projects/house')">House</el-menu-item>
-          <el-menu-item index="2-2" @click="handleChangeRoute('/scrollBaseAnimation')">scrollBaseAnimation
-          </el-menu-item>
+          <el-menu-item index="3-1" @click="handleChangeRoute(`/projects/House`)">House</el-menu-item>
+          <el-menu-item index="3-1" @click="handleChangeRoute(`/ScrollBaseAnimation`)">ScrollBaseAnimation</el-menu-item>
         </el-sub-menu>
-
-        <el-menu-item index="4">
-          <el-icon>
-            <setting/>
-          </el-icon>
-          <span>Navigator Four</span>
-        </el-menu-item>
       </el-menu>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts" setup>
-import { Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue'
+import { FolderOpened } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
+
+const nav = {
+  three: ['FirstScene', 'Transform', 'Animation', 'Camera', 'Fullscreen', 'Geometry', 'Textures', 'Materials', 'threeDText'
+    , 'Lights', 'Shadow', 'Particles', 'Galaxy', 'RayCaster', 'Physics', 'Models', 'Realistic', 'Shaders', 'ShaderPatterns'
+    , 'RagingSea', 'AnimatedGalaxy', 'ModifiedMaterial', 'PostProcessing'
+  ],
+  webgpu: ['index'],
+}
 
 const Router = useRouter()
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -90,6 +68,6 @@ const handleChangeRoute = (path: string) => {
   height: 60px;
   text-align: center;
   line-height: 60px;
-  font-size: 48px;
+  font-size: 28px;
 }
 </style>

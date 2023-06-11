@@ -1,106 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-
-const BasicChildren = [
-  {
-    path: 'first-scene',
-    component: () => import('../components/basic/FirstScene.vue')
-  },
-  {
-    path: 'transform',
-    component: () => import('../components/basic/Transform.vue')
-  },
-  {
-    path: 'animation',
-    component: () => import('../components/basic/Animation.vue')
-  },
-  {
-    path: 'camera',
-    component: () => import('../components/basic/Camera.vue')
-  },
-  {
-    path: 'fullscreen',
-    component: () => import('../components/basic/Fullscreen.vue')
-  },
-  {
-    path: 'geometry',
-    component: () => import('../components/basic/Geometry.vue')
-  },
-  {
-    path: 'textures',
-    component: () => import('../components/basic/Textures.vue')
-  },
-  {
-    path: 'materials',
-    component: () => import('../components/basic/Materials.vue')
-  },
-  {
-    path: 'threeD-text',
-    component: () => import('../components/basic/ThreeDText.vue')
-  },
-  {
-    path: 'lights',
-    component: () => import('../components/basic/Lights.vue')
-  },
-  {
-    path: 'shadow',
-    component: () => import('../components/basic/Shadow.vue')
-  },
-  {
-    path: 'particles',
-    component: () => import('../components/basic/Particles.vue')
-  },
-  {
-    path: 'galaxy',
-    component: () => import('../components/basic/Galaxy.vue')
-  },
-  {
-    path: 'rayCaster',
-    component: () => import('../components/basic/RayCaster.vue')
-  },
-  {
-    path: 'physics',
-    component: () => import('../components/basic/Physics.vue')
-  },
-  {
-    path: 'models',
-    component: () => import('../components/basic/Models.vue')
-  },
-  {
-    path: 'realistic',
-    component: () => import('../components/basic/Realistic.vue')
-  },
-  {
-    path: 'shaders',
-    component: () => import('../components/basic/Shaders.vue')
-  },
-  {
-    path: 'shaders-patterns',
-    component: () => import('../components/basic/ShaderPatterns.vue')
-  },
-  {
-    path: 'raging-sea',
-    component: () => import('../components/basic/RagingSea.vue')
-  },
-  {
-    path: 'animated-galaxy',
-    component: () => import('../components/basic/AnimatedGalaxy.vue')
-  },
-  {
-    path: 'modified-material',
-    component: () => import('../components/basic/ModifiedMaterial.vue')
-  },
-  {
-    path: 'post-processing',
-    component: () => import('../components/basic/PostProcessing.vue')
-  }
-]
-
-const ProjectChildren = [
-  {
-    path: 'house',
-    component: () => import('../components/projects/House.vue')
-  }
-]
+import { createRouter, createWebHashHistory, RouteRecordRaw, } from 'vue-router'
 
 const routes = [
   {
@@ -110,23 +8,28 @@ const routes = [
   {
     path: '/',
     component: () => import('../pages/Index.vue'),
-    redirect: '/basic',
+    redirect: 'three',
     children: [
       {
-        path: 'basic',
-        redirect: '/basic/galaxy',
-        children: BasicChildren
+        path: 'three',
+        name: 'three',
+        redirect: '/three/FirstScene'
+      },
+      {
+        path: 'webgpu',
+        name: 'webgpu',
+        redirect: '/webgpu/index'
       },
       {
         path: 'projects',
-        redirect: '/projects/house',
-        children: ProjectChildren
+        name: 'projects',
+        redirect: '/projects/house'
       }
     ]
   },
   {
     path: '/scrollBaseAnimation',
-    component: () => import('../components/basic/ScrollBaseAnimation.vue')
+    component: () => import('../three/basic/ScrollBaseAnimation.vue')
   }
 ]
 
@@ -134,5 +37,30 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+interface IRouter {
+  [key: string]: RouteRecordRaw
+}
+
+const allModule = await import.meta.glob('../../src/**/*.vue')
+const cate = ['three', 'webgpu', 'projects']
+export let childRouteModule: IRouter = {}
+for (const module in allModule) {
+  cate.forEach(catePath => {
+    if (module.includes(catePath)) {
+      ; // @ts-ignore
+      (childRouteModule[catePath] || (childRouteModule[catePath] = [])).push({
+        path: module.match(/[a-zA-z]+(?=\.vue)/)![0],
+        component: allModule[module]
+      })
+    }
+  })
+}
+
+for (const childRouteModuleKey in childRouteModule) {
+  (childRouteModule[childRouteModuleKey] as any).forEach((childPath: RouteRecordRaw) => {
+    router.addRoute(childRouteModuleKey, childPath)
+  })
+}
 
 export default router

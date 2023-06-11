@@ -1,11 +1,15 @@
 <template>
   <div class="main">
     <el-container>
-      <el-aside width="200px"><Nav /></el-aside>
+      <el-aside width="200px">
+        <Nav/>
+      </el-aside>
       <el-container>
-        <el-header>欢迎来到Three</el-header>
+        <el-header>
+          <Header/>
+        </el-header>
         <el-main>
-          <router-view />
+          <router-view/>
         </el-main>
       </el-container>
     </el-container>
@@ -14,6 +18,7 @@
 
 <script lang="ts" setup>
 import Nav from './Nav.vue'
+import Header from "./Header.vue"
 </script>
 
 <style lang="less" scoped>
@@ -28,11 +33,11 @@ import Nav from './Nav.vue'
 }
 
 .el-aside {
-  background-color: aquamarine;
+  background-color: #ffffff;
 }
 
 .el-header {
-  background-color: bisque;
+  background-color: #dadada;
 }
 
 .el-main {
