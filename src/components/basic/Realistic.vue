@@ -1,11 +1,14 @@
 <template>
   <canvas ref="webgl"/>
+  <div class="loading-bar" ref="loading">
+    <span>{{ progress }} %</span>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from "vue"
 import * as THREE from 'three'
-import { WebGLRenderer } from "three"
+import { LoadingManager, WebGLRenderer } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import * as Dat from 'dat.gui'
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
@@ -15,14 +18,31 @@ import pyTexture from './assets/textures/environmentMaps/0/py.jpg'
 import nyTexture from './assets/textures/environmentMaps/0/ny.jpg'
 import pzTexture from './assets/textures/environmentMaps/0/pz.jpg'
 import nzTexture from './assets/textures/environmentMaps/0/nz.jpg'
+import { gsap } from "gsap"
 
 const webgl = ref()
+const loading = ref()
+const progress = ref(0)
 
 /**
  * loader
  */
-const gltfLoader = new GLTFLoader()
-const cubeTextures = new THREE.CubeTextureLoader()
+const loadingManager = new LoadingManager(
+    () => {
+      gsap.delayedCall(0.5, () => {
+        gsap.to(overlayMartial.uniforms.uAlpha, { duration: 3, value: 0 })
+        loading.value.classList.add('ended')
+        loading.value.style.transform = ''
+      })
+    },
+    (itemUrl, itemsLoaded, itemsTotal) => {
+      const progressRatio = itemsLoaded / itemsTotal
+      progress.value = Math.floor(progressRatio * 100)
+      loading.value.style.transform = `scaleX(${ progressRatio })`
+    }
+)
+const gltfLoader = new GLTFLoader(loadingManager)
+const cubeTextures = new THREE.CubeTextureLoader(loadingManager)
 const environmentList = cubeTextures.load([
   pxTexture,
   nxTexture,
@@ -70,6 +90,31 @@ scene.add(camera)
 // scene.add(testSphere)
 
 /**
+ * overlay
+ */
+const overlayGeometry = new THREE.PlaneBufferGeometry(2, 2, 1, 1)
+const overlayMartial = new THREE.ShaderMaterial({
+  transparent: true,
+  uniforms: {
+    uAlpha: { value: 1.0 }
+  },
+  vertexShader: `
+    void main () {
+      gl_Position = vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform float uAlpha;
+
+    void main () {
+      gl_FragColor = vec4(0.0, 0.0, 0.0, uAlpha);
+    }
+  `
+})
+const overlay = new THREE.Mesh(overlayGeometry, overlayMartial)
+scene.add(overlay)
+
+/**
  * light
  */
 const directionalLight = new THREE.DirectionalLight('#fff', 3)
@@ -79,8 +124,8 @@ directionalLight.shadow.camera.far = 15
 directionalLight.shadow.mapSize.set(1024, 1024)
 scene.add(directionalLight)
 
-const directionLightHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
-scene.add(directionLightHelper)
+// const directionLightHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
+// scene.add(directionLightHelper)
 
 gui.add(directionalLight, 'intensity').min(1).max(10).step(0.001).name('LightIntensity')
 gui.add(directionalLight.position, 'x').min(-5).max(5).step(0.001).name('LightX')
@@ -181,6 +226,30 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.loading-bar {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: top left;
+  transition: transfrom 0.5s;
+  will-change: transfrom;
 
+  &.ended {
+    transform-origin: top right;
+    transition: transfrom 1.5s ease-in-out;
+  }
+
+  span {
+    display: block;
+    position: absolute;
+    top: -30px;
+    font-size: 36px;
+    color: #ffffff;
+    left: 20px;
+  }
+}
 </style>

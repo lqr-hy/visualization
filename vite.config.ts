@@ -6,7 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import glsl from 'vite-plugin-glsl'
 
 export default defineConfig({
-  base: 'threejs',
+  base: 'visualization',
   plugins: [
     vue(),
     AutoImport({
