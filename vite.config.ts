@@ -6,6 +6,9 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import glsl from 'vite-plugin-glsl'
 
 export default defineConfig({
+  build: {
+    target: 'esnext'
+  },
   base: 'visualization',
   plugins: [
     vue(),
