@@ -9,7 +9,7 @@
           @close="handleClose"
           :unique-opened="true"
       >
-        <el-sub-menu :index="navKey" v-for="(navValue, navKey, index) in nav">
+        <el-sub-menu :index="navKey" v-for="(navValue, navKey) in nav" :key="navKey">
           <template #title>
             <el-icon>
               <FolderOpened/>
@@ -17,7 +17,8 @@
             <span>{{ navKey }}</span>
           </template>
           <el-menu-item :index="`/${navKey}/${navPath}`"
-                        v-for="(navPath, childIndex) of navValue"
+                        v-for="navPath of navValue"
+                       :key="navPath"
                         @click="handleChangeRoute(`/${navKey}/${navPath}`)"
           >{{ navPath }}
           </el-menu-item>
@@ -46,7 +47,7 @@ const nav = {
     , 'Lights', 'Shadow', 'Particles', 'Galaxy', 'RayCaster', 'Physics', 'Models', 'Realistic', 'Shaders', 'ShaderPatterns'
     , 'RagingSea', 'AnimatedGalaxy', 'ModifiedMaterial', 'PostProcessing'
   ],
-  webgpu: ['index'],
+  webgpu: ['Triangle', 'ColorTriangle', 'index'],
 }
 
 const Router = useRouter()
