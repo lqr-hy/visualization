@@ -47,7 +47,7 @@ const nav = {
     , 'Lights', 'Shadow', 'Particles', 'Galaxy', 'RayCaster', 'Physics', 'Models', 'Realistic', 'Shaders', 'ShaderPatterns'
     , 'RagingSea', 'AnimatedGalaxy', 'ModifiedMaterial', 'PostProcessing'
   ],
-  webgpu: ['Triangle', 'ColorTriangle', 'index'],
+  webgpu: ['Triangle', 'ColorTriangle',  'RotatingCube', 'index'],
 }
 
 const Router = useRouter()

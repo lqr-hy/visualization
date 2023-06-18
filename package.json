@@ -17,6 +17,7 @@
     "cannon-es-debugger": "^1.0.0",
     "dat.gui": "^0.7.9",
     "element-plus": "^2.2.10",
+    "gl-matrix": "^3.4.3",
     "gsap": "^3.10.4",
     "pinia": "^2.0.16",
     "swiper": "^8.4.5",
