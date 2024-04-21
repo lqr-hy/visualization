@@ -235,12 +235,12 @@ onUnmounted(() => {
   background: #ffffff;
   transform: scaleX(0);
   transform-origin: top left;
-  transition: transfrom 0.5s;
-  will-change: transfrom;
+  transition: transform 0.5s;
+  will-change: transform;
 
   &.ended {
     transform-origin: top right;
-    transition: transfrom 1.5s ease-in-out;
+    transition: transform 1.5s ease-in-out;
   }
 
   span {

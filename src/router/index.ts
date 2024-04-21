@@ -8,12 +8,17 @@ const routes = [
   {
     path: '/',
     component: () => import('../pages/Index.vue'),
-    redirect: 'three',
+    redirect: 'basic',
     children: [
       {
-        path: 'three',
-        name: 'three',
-        redirect: '/three/FirstScene'
+        path: 'basic',
+        name: 'basic',
+        redirect: '/basic/FirstScene'
+      },
+      {
+        path: 'advanced',
+        name: 'advanced',
+        redirect: '/advanced'
       },
       {
         path: 'webgpu',
@@ -43,7 +48,7 @@ interface IRouter {
 }
 
 const allModule = await import.meta.glob('../../src/**/*.vue')
-const cate = ['three', 'webgpu', 'projects']
+const cate = ['basic', 'advanced', 'webgpu', 'projects']
 export let childRouteModule: IRouter = {}
 for (const module in allModule) {
   cate.forEach(catePath => {

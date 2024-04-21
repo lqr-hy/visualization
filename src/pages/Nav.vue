@@ -43,10 +43,11 @@ import { FolderOpened } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 
 const nav = {
-  three: ['FirstScene', 'Transform', 'Animation', 'Camera', 'Fullscreen', 'Geometry', 'Textures', 'Materials', 'threeDText'
+  basic: ['FirstScene', 'Transform', 'Animation', 'Camera', 'Fullscreen', 'Geometry', 'Textures', 'Materials', 'threeDText'
     , 'Lights', 'Shadow', 'Particles', 'Galaxy', 'RayCaster', 'Physics', 'Models', 'Realistic', 'Shaders', 'ShaderPatterns'
-    , 'RagingSea', 'AnimatedGalaxy', 'ModifiedMaterial', 'PostProcessing'
+    , 'RagingSea', 'AnimatedGalaxy', 'ModifiedMaterial', 'PostProcessing', 'ThreeDImage', 'Fox', 'MixHtmlIntoWebgl'
   ],
+  advanced: ['Physics', 'Collision', 'Combination', 'Force'],
   webgpu: ['Triangle', 'ColorTriangle',  'RotatingCube', 'index'],
 }
 

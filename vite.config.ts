@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     target: 'esnext'
   },
-  base: 'visualization',
+  base: '/visualization',
   plugins: [
     vue(),
     AutoImport({

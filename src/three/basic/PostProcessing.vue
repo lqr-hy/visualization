@@ -23,7 +23,6 @@ import pzTexture from './assets/textures/environmentMaps/0/pz.jpg'
 import nzTexture from './assets/textures/environmentMaps/0/nz.jpg'
 import interfaceNormalMap  from './assets/textures/interfaceNormalMap.png?url'
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import DamagedHelmetUrl from ''
 import normalUrl from './assets/models/LeePerrySmith/normal.jpg?url'
 import colorUrl from './assets/models/LeePerrySmith/color.jpg?url'
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
@@ -40,8 +39,8 @@ const webgl = ref()
 const gui = new DAT.GUI()
 
 const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight
+  width: window.innerWidth - 240,
+  height: window.innerHeight - 100
 }
 
 // Material
